@@ -2,6 +2,7 @@ const express = require('express');
 const colors = require('colors');
 require('dotenv').config();
 const { graphqlHTTP } = require('express-graphql');
+const cors = require('cors');
 const schema = require('./schema/schema');
 const connectDB = require('./config/db')
 const port = process.env.PORT || 5000;
@@ -10,6 +11,8 @@ const app = express();
 
 //Connect to MongoDB database
 connectDB();
+
+app.use(cors());
 
 //enable graphiql which is like Postman for RES API
 app.use('/graphql', graphqlHTTP({
